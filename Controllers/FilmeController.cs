@@ -18,4 +18,10 @@ public class FilmeController : ControllerBase
 
         return CreatedAtAction(nameof(Get), new { id = filme.Id }, filme);
     }
+
+    [HttpGet]
+    public IEnumerable<Filme> List([FromQuery] int skip = 0, [FromQuery] int take = 50)
+    {
+        return Filmes.Skip(skip).Take(take);
+    }
 }
