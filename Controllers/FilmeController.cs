@@ -39,8 +39,7 @@ public class FilmeController : ControllerBase
     [HttpGet("{id}")]
     public IActionResult Get(int id)
     {
-        var filme = _context.Filmes.FirstOrDefault(filme => filme.Id == id);
-
+        Filme? filme = _FindFilme(id);
         if (filme == null) return NotFound();
 
         return Ok(filme);
@@ -49,7 +48,7 @@ public class FilmeController : ControllerBase
     [HttpPut("{id}")]
     public IActionResult Put(int id, [FromBody] UpdateFilmeDto filmeDto)
     {
-        var filme = _context.Filmes.FirstOrDefault(filme => filme.Id == id);
+        Filme? filme = _FindFilme(id);
         if (filme == null) return NotFound();
 
         _mapper.Map(filmeDto, filme);
@@ -61,7 +60,7 @@ public class FilmeController : ControllerBase
     [HttpPatch("{id}")]
     public IActionResult Patch(int id, JsonPatchDocument<UpdateFilmeDto> patch)
     {
-        var filme = _context.Filmes.FirstOrDefault(filme => filme.Id == id);
+        Filme? filme = _FindFilme(id);
         if (filme == null) return NotFound();
 
         var filmeParaAtualizar = _mapper.Map<UpdateFilmeDto>(filme);
@@ -76,5 +75,24 @@ public class FilmeController : ControllerBase
         _context.SaveChanges();
 
         return NoContent();
+    }
+
+    [HttpDelete("{id}")]
+    public IActionResult Delete(int id)
+    {
+        Filme? filme = _FindFilme(id);
+        if (filme == null) return NotFound();
+
+        _context.Remove(filme);
+        _context.SaveChanges();
+
+        return NoContent();
+    }
+
+    private Filme? _FindFilme(int id)
+    {
+        Filme? filme = _context.Filmes.FirstOrDefault(filme => filme.Id == id);
+
+        return filme;
     }
 }
