@@ -24,4 +24,14 @@ public class FilmeController : ControllerBase
     {
         return Filmes.Skip(skip).Take(take);
     }
+
+    [HttpGet("{id}")]
+    public IActionResult Get(int id)
+    {
+        var filme =  Filmes.FirstOrDefault(filme => filme.Id == id);
+
+        if (filme == null) return NotFound();
+
+        return Ok(filme);
+    }
 }
