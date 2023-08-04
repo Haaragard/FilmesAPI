@@ -9,5 +9,5 @@ public class Cinema
     public int Id { get; set; }
 
     [Required(ErrorMessage = "O campo de nome é obrigatório.")]
-    public string Name { get; set; }
+    public string Nome { get; set; }
 }

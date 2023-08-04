@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FilmesAPI.Migrations
 {
     [DbContext(typeof(FilmeContext))]
-    [Migration("20230804003047_CriandoTabelaDeCinemas")]
+    [Migration("20230804005547_CriandoTabelaDeCinemas")]
     partial class CriandoTabelaDeCinemas
     {
         /// <inheritdoc />
@@ -27,7 +27,7 @@ namespace FilmesAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("longtext");
 
